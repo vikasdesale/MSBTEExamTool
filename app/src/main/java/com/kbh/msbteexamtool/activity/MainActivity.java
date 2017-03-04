@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
-        //setupViewPager(viewPager);
+        setupViewPager(viewPager);
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.htab_tabs);
@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void setupViewPager(ViewPager viewPager) {
 
+    
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
