@@ -5,10 +5,15 @@ package com.kbh.msbteexamtool.activity;
  */
 
  import android.os.Bundle;
+ import android.support.design.widget.CollapsingToolbarLayout;
+ import android.support.design.widget.TabLayout;
+ import android.support.v4.view.ViewPager;
  import android.support.v7.app.AppCompatActivity;
  import android.support.v7.widget.Toolbar;
  import android.view.Menu;
  import android.view.MenuItem;
+ import android.widget.ImageView;
+
  import com.kbh.msbteexamtool.R;
 
 
@@ -18,11 +23,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.htab_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Parallax Tabs");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
+        //setupViewPager(viewPager);
+
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.htab_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.htab_collapse_toolbar);
+        collapsingToolbarLayout.setTitleEnabled(false);
 
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
