@@ -15,6 +15,8 @@ package com.kbh.msbteexamtool.activity;
  import android.widget.ImageView;
 
  import com.kbh.msbteexamtool.R;
+ import com.kbh.msbteexamtool.adapters.ViewPagerAdapter;
+ import com.kbh.msbteexamtool.fragments.MSBTEFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
 
-    
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new MSBTEFragment(getResources().getColor(R.color.accent_material_light)), "CSE");
+        adapter.addFrag(new MSBTEFragment(getResources().getColor(R.color.ripple_material_light)), "MECH");
+        adapter.addFrag(new MSBTEFragment(getResources().getColor(R.color.button_material_dark)), "CIVIL");
+        viewPager.setAdapter(adapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
