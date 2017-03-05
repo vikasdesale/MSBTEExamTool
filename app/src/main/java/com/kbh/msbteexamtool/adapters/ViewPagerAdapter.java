@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.kbh.msbteexamtool.fragments.MSBTEFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,30 +14,25 @@ import java.util.List;
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> mFragmentList = new ArrayList<>();
-    private final List<String> mFragmentTitleList = new ArrayList<>();
+    int mNumOfTabs;
 
-    public ViewPagerAdapter(FragmentManager manager) {
-        super(manager);
+    public ViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
+        super(fm);
+        this.mNumOfTabs = NumOfTabs;
     }
+
+
 
     @Override
     public Fragment getItem(int position) {
-        return mFragmentList.get(position);
+
+                MSBTEFragment tab1 = new MSBTEFragment();
+                return tab1;
+
     }
 
     @Override
     public int getCount() {
-        return mFragmentList.size();
-    }
-
-    public void addFrag(Fragment fragment, String title) {
-        mFragmentList.add(fragment);
-        mFragmentTitleList.add(title);
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mFragmentTitleList.get(position);
+        return mNumOfTabs;
     }
 }

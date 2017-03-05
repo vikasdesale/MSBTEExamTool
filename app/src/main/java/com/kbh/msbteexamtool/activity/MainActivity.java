@@ -19,7 +19,10 @@ package com.kbh.msbteexamtool.activity;
  import com.kbh.msbteexamtool.fragments.MSBTEFragment;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +30,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.htab_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Parallax Tabs");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("MSBTE Exam Tool");
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
+
+
+        viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
+        tabLayout = (TabLayout) findViewById(R.id.htab_tabs);
         setupViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(this);
 
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.htab_tabs);
-        tabLayout.setupWithViewPager(viewPager);
 
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.htab_collapse_toolbar);
         collapsingToolbarLayout.setTitleEnabled(false);
@@ -44,12 +49,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new MSBTEFragment(getResources().getColor(R.color.accent_material_light)), "CSE");
-        adapter.addFrag(new MSBTEFragment(getResources().getColor(R.color.ripple_material_light)), "MECH");
-        adapter.addFrag(new MSBTEFragment(getResources().getColor(R.color.button_material_dark)), "CIVIL");
+        tabLayout.addTab(tabLayout.newTab().setText("Semester 1"));
+        tabLayout.addTab(tabLayout.newTab().setText("Semester 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("Semester 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("Semester 4"));
+        tabLayout.addTab(tabLayout.newTab().setText("Semester 5"));
+        tabLayout.addTab(tabLayout.newTab().setText("Semester 6"));
+        final ViewPagerAdapter adapter = new ViewPagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,5 +74,20 @@ public class MainActivity extends AppCompatActivity {
         //}
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }
