@@ -23,29 +23,23 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
+    private ViewPagerAdapter adapter;
+    private  Toolbar toolbar;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.htab_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.htab_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("MSBTE Exam Tool");
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-
-
-
         viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
         tabLayout = (TabLayout) findViewById(R.id.htab_tabs);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.htab_collapse_toolbar);
+        collapsingToolbarLayout.setTitleEnabled(false);
         setupViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(this);
-
-
-        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.htab_collapse_toolbar);
-        collapsingToolbarLayout.setTitleEnabled(false);
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -55,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         tabLayout.addTab(tabLayout.newTab().setText("Semester 4"));
         tabLayout.addTab(tabLayout.newTab().setText("Semester 5"));
         tabLayout.addTab(tabLayout.newTab().setText("Semester 6"));
-        final ViewPagerAdapter adapter = new ViewPagerAdapter
+        adapter = new ViewPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
