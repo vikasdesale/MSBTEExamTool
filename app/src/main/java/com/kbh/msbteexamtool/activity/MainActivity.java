@@ -4,6 +4,7 @@ package com.kbh.msbteexamtool.activity;
  * Created by Dell on 2/1/2017.
  */
 
+ import android.content.Intent;
  import android.os.Bundle;
  import android.support.design.widget.CollapsingToolbarLayout;
  import android.support.design.widget.TabLayout;
@@ -13,29 +14,31 @@ package com.kbh.msbteexamtool.activity;
  import android.view.Menu;
  import android.view.MenuItem;
  import android.widget.ImageView;
+ import android.widget.TextView;
 
  import com.kbh.msbteexamtool.R;
  import com.kbh.msbteexamtool.adapters.ViewPagerAdapter;
  import com.kbh.msbteexamtool.fragments.MSBTEFragment;
 
+ import butterknife.BindView;
+ import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    @BindView(R.id.htab_viewpager) private ViewPager viewPager;
+    @BindView(R.id.htab_tabs) private TabLayout tabLayout;
+    @BindView (R.id.htab_toolbar) private  Toolbar toolbar;
+    @BindView(R.id.htab_collapse_toolbar) private CollapsingToolbarLayout collapsingToolbarLayout;
     private ViewPagerAdapter adapter;
-    private  Toolbar toolbar;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.htab_toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("MSBTE Exam Tool");
-        viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
-        tabLayout = (TabLayout) findViewById(R.id.htab_tabs);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.htab_collapse_toolbar);
         collapsingToolbarLayout.setTitleEnabled(false);
         setupViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         tabLayout.addTab(tabLayout.newTab().setText("Semester 4"));
         tabLayout.addTab(tabLayout.newTab().setText("Semester 5"));
         tabLayout.addTab(tabLayout.newTab().setText("Semester 6"));
+
+
         adapter = new ViewPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
