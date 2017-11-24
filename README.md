@@ -8,7 +8,7 @@
 # Download From Play Store :
 ****
 
-    https://play.google.com/store/apps/details?id=com.kbh.msbteexamtool
+    ![Alt text](https://play.google.com/store/apps/details?id=com.kbh.msbteexamtool)
 
 # Screenshot
 ****
